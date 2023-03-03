@@ -22,6 +22,6 @@ class BasicDataSet(Dataset):
         mask = np.array(Image.open(mask_path).convert("L"))
 
         assert image.shape[:2] == mask.shape
-        return image,mask
+        return image, mask
 
 
