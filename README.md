@@ -1,3 +1,3 @@
 # UNET_segmentatioin
 
-![System Monitor](u-net-architecture)
+![UNET-architecture](u-net-architecture.png)
