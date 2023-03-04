@@ -19,7 +19,7 @@ class BasicDataSet(Dataset):
         mask_path = os.path.join(self.mask_dir,self.images[index].replace(".jpg", ".png"))
         
         image = np.array(Image.open(image_path).convert("RGB"))
-        mask = np.array(Image.open(mask_path).convert("L"))
+        mask = np.array(Image.open(mask_path).convert("L"),dtype=np.float32)
 
         assert image.shape[:2] == mask.shape
         return image, mask

@@ -1,8 +1,8 @@
 import torch
 import torchvision.transforms.functional as TF
-from model_parts import *
+from .UNet_parts import *
 
-class Unet(torch.nn.Module):
+class UNet(torch.nn.Module):
     def __init__(self,in_channels, out_channels,features=[64,128,256,512]):
         super().__init__()
         self.down = torch.nn.ModuleList()
@@ -25,12 +25,12 @@ class Unet(torch.nn.Module):
     def forward(self,x):
         skip_connections = []
 
+
         for down in self.down:
             x = down(x)
             skip_connections.append(x)
             x = torch.nn.MaxPool2d(kernel_size=2)(x)
             
-        
         x = self.bottle_neck(x)
         skip_connections = skip_connections[::-1] 
 
@@ -43,10 +43,8 @@ class Unet(torch.nn.Module):
 
             concat_skip = torch.cat((skip_connection, x), dim=1)
             x = self.up[i+1](concat_skip)
+
         x = self.output(x)
-            
-            
-            
         return x
 
 

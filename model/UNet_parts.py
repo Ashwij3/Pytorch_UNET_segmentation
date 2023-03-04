@@ -1,7 +1,6 @@
 import torch
 
 
-
 class DoubleConv(torch.nn.Module):
     def __init__(self,in_channels, out_channels, mid_channels = None) -> None:
         super().__init__()
@@ -19,15 +18,3 @@ class DoubleConv(torch.nn.Module):
     
     def forward(self,x):
         return self.model(x)
-    
-
-# class Down(torch.nn.Module):
-#     def __init__(self,in_channels, out_channels):
-#         super().__init__()
-#         self.model = torch.nn.Sequential(
-#             torch.nn.MaxPool2d(kernel_size=2),
-#             DoubleConv(in_channels, out_channels)
-#         )
-
-#     def forward(self,x):
-#         return self.model(x)
