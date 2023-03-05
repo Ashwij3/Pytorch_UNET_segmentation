@@ -42,15 +42,16 @@ def main():
                                             config['NUM_WORKERS'],
                                             config['PIN_MEMORY'])
 
+    
     model = UNet(in_channels=3,out_channels=1).to(DEVICE)
+    if config['LOAD_MODEL']:
+        weight = torch.load(os.path.join(current_dir,"pre_trained.pth.tar"))
+        model.load_state_dict(weight["state_dict"])
+    
     loss_func = torch.nn.BCEWithLogitsLoss()
     scaler = torch.cuda.amp.GradScaler()
     optimizer = torch.optim.Adam(model.parameters(),lr=config['LEARNING_RATE'])
     # lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2,gamma=0.1)
-    
-    if config['LOAD_MODEL']:
-        weight = torch.load(os.path.join(current_dir,"pre_trained.pth.tar"))
-        model.load_state_dict(weight["state_dict"])
     
     for epoch in range(config['NUM_EPOCHS']):
         train(train_loader,model,loss_func,optimizer,scaler)
@@ -64,15 +65,6 @@ def main():
 
         # lr_scheduler.step()
 
-
-        # with torch.cuda.amp.autocast():
-        #     pred = model(data)
-        #     loss = loss_func(pred, targets)
-        #     print(loss.item())
-        # optimizer.zero_grad()
-        # scaler.scale(loss).backward()
-        # scaler.step(optimizer)
-        # scaler.update()
 
 
 

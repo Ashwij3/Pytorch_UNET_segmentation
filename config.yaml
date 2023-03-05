@@ -6,7 +6,7 @@ NUM_WORKERS: 2
 IMAGE_HEIGHT: 256  # 1280 originally
 IMAGE_WIDTH: 512  # 1918 originally
 PIN_MEMORY: true
-LOAD_MODEL: true
+LOAD_MODEL: false
 TRAIN_IMG_DIR: data/train_images/
 TRAIN_MASK_DIR: data/train_masks/
 VAL_IMG_DIR: data/val_images/
