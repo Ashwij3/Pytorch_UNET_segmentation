@@ -15,6 +15,12 @@ class DoubleConv(torch.nn.Module):
             torch.nn.ReLU(inplace=True),
             
         )
+        for module in self.modules():
+            if isinstance(module, torch.nn.Conv2d):
+                torch.nn.init.kaiming_normal_(module.weight, mode='fan_out', nonlinearity='relu')
+            elif isinstance(module, torch.nn.BatchNorm2d):
+                torch.nn.init.constant_(module.weight, 1)
+                torch.nn.init.constant_(module.bias, 0)
     
     def forward(self,x):
         return self.model(x)

@@ -18,3 +18,7 @@ def get_loaders(
     valid_loader = DataLoader(valid_Dataset,batch_size=batch_size,num_workers=num_workers,pin_memory=pin_memory,shuffle=True)
 
     return train_loader,valid_loader
+
+def save_checkpoint(state, filename="my_checkpoint.pth.tar"):
+    print("=> Saving checkpoint")
+    torch.save(state, filename)

@@ -10,6 +10,7 @@ class UNet(torch.nn.Module):
         
         self.bottle_neck = DoubleConv(in_channels=features[-1], out_channels=2*features[-1])
         self.output = torch.nn.Conv2d(features[0], out_channels, kernel_size=1)
+        torch.nn.init.xavier_uniform_(self.output.weight)
         
         for feature in features:
             self.down.append(DoubleConv(in_channels=in_channels, out_channels=feature))
@@ -19,6 +20,7 @@ class UNet(torch.nn.Module):
         for feature in reversed(features):
             self.up.append(torch.nn.ConvTranspose2d(feature*2,feature,kernel_size=2, stride=2))
             self.up.append(DoubleConv(feature*2,feature))
+            torch.nn.init.kaiming_uniform_(self.up[-2].weight, nonlinearity='relu')
         
 
     

@@ -18,10 +18,12 @@ class BasicDataSet(Dataset):
         image_path = os.path.join(self.img_dir,self.images[index])
         mask_path = os.path.join(self.mask_dir,self.images[index].replace(".jpg", ".png"))
         
-        image = np.array(Image.open(image_path).convert("RGB"))
-        mask = np.array(Image.open(mask_path).convert("L"),dtype=np.float32)
+        image = np.array(Image.open(image_path).convert("RGB").resize((512,256)))
+        mask = np.array(Image.open(mask_path).convert("L").resize((512,256)),dtype=np.float32)
 
         assert image.shape[:2] == mask.shape
         return image, mask
 
 
+# d = BasicDataSet("/home/ak47/unet/UNET_segmentatioin/data/train_images","/home/ak47/unet/UNET_segmentatioin/data/train_masks")
+# d.__getitem__(index)
