@@ -11,22 +11,17 @@ class UNet(torch.nn.Module):
         self.bottle_neck = DoubleConv(in_channels=features[-1], out_channels=2*features[-1])
         self.output = torch.nn.Conv2d(features[0], out_channels, kernel_size=1)
 
-        
         for feature in features:
             self.down.append(DoubleConv(in_channels=in_channels, out_channels=feature))
             in_channels = feature
         
-
         for feature in reversed(features):
             self.up.append(torch.nn.ConvTranspose2d(feature*2,feature,kernel_size=2, stride=2))
             self.up.append(DoubleConv(feature*2,feature))
-
-        
-
+    
     
     def forward(self,x):
         skip_connections = []
-
 
         for down in self.down:
             x = down(x)
