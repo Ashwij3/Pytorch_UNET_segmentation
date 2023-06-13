@@ -1,8 +1,9 @@
-Carvana Image Masking Challenge: Image Segmentation using UNET
+Semantic Segmentation of Urban Scene using UNET
 ==============================================================
 ==============================================================
 
-This project is an implementation of the UNET architecture for image segmentation of the Carvana Image Masking Challenge dataset. The objective of this challenge is to develop a model that can accurately identify the boundaries of cars in an image, which can be useful in various applications such as self-driving cars, traffic monitoring, and parking lot management.
+This project is an implementation of the UNET architecture for image segmentation of the Cityscape dataset. The objective of this challenge is to develop a model that can accurately identify the diverse street scenes captured in various cities, with pixel-level annotations for different semantic categories, which can be useful in various applications such as self-driving cars, traffic monitoring, and parking lot management.
+
 
 Model Architecture
 ------------------
@@ -16,7 +17,7 @@ This implementation of the UNET architecture consists of four encoder blocks and
 Dataset
 -------
 
-The Carvana Image Masking Challenge dataset is available for download from [Kaggle](https://www.kaggle.com/c/carvana-image-masking-challenge/data). 
+To use this project, you will need to download the Cityscapes dataset separately from the official website which can be found [here](https://www.cityscapes-dataset.com/).
 
 Getting Started
 ---------------
@@ -47,7 +48,7 @@ Copy code
 
 `python3 train.py`
 
-By default, the training script will use the UNET architecture and the Carvana Image Masking Challenge dataset. You can customize the parameters of the training process by editing the `config.yaml` file.
+By default, the training script will use the UNET architecture and the Cityscape dataset. You can customize the parameters of the training process by editing the `config.yaml` file.
 
 Evaluation
 ----------
@@ -65,4 +66,3 @@ Acknowledgments
 ---------------
 
 -   This project is based on the UNET architecture proposed by Ronneberger et al. in their paper "U-Net: Convolutional Networks for Biomedical Image Segmentation" (<https://arxiv.org/abs/1505.04597>)
--   The Carvana Image Masking Challenge dataset is provided by Kaggle (<https://www.kaggle.com/c/carvana-image-masking-challenge/data>)
